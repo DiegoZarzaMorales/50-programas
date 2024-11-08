@@ -10,7 +10,7 @@ class Program
     {
         int n = 10;
         int a = 0, b = 1;
-        Console.Write($"Serie de Fibonacci hasta el término {n}: ");
+        Console.Write($"Los primeros {n} números de Fibonacci son: ");
         for(int i = 0; i < n; i++)
         {
             Console.Write($"{a} ");
@@ -23,53 +23,55 @@ class Program
 */
 
 .data
-    fmt_start: .string "Serie de Fibonacci hasta el término %d: "
-    fmt_num:   .string "%d "
-    fmt_nl:    .string "\n"
-    n:         .word 10
+    msg_start:  .string "Los primeros %d números de Fibonacci son: "
+    msg_num:    .string "%d "
+    msg_nl:     .string "\n"
+    n:          .word 10
 
 .text
 .global main
-.balign 4
 
 main:
+    // Prólogo
     stp     x29, x30, [sp, #-16]!
+    mov     x29, sp
 
     // Imprimir mensaje inicial
-    adr     x0, fmt_start
+    adr     x0, msg_start
     adr     x1, n
     ldr     w1, [x1]
     bl      printf
 
     // Inicializar variables
-    mov     w19, #0                 // w19 = a = 0
-    mov     w20, #1                 // w20 = b = 1
-    mov     w21, #0                 // w21 = i = 0
-    adr     x0, n
-    ldr     w22, [x0]               // w22 = n
+    mov     w19, #0          // w19 = a
+    mov     w20, #1          // w20 = b
+    mov     w21, #0          // w21 = i
+    adr     x22, n
+    ldr     w22, [x22]       // w22 = n
 
 loop:
-    cmp     w21, w22                // Comparar i con n
-    bge     done                    // Si i >= n, terminar
-    
+    cmp     w21, w22         // Comparar i con n
+    bge     done            // Si i >= n, terminar
+
     // Imprimir número actual
-    adr     x0, fmt_num
-    mov     w1, w19
+    adr     x0, msg_num
+    mov     w1, w19          // a
     bl      printf
 
     // Calcular siguiente número
-    mov     w23, w19                // temp = a
-    mov     w19, w20                // a = b
-    add     w20, w23, w20           // b = temp + b
-    
-    add     w21, w21, #1            // i++
+    mov     w23, w19         // temp = a
+    mov     w19, w20         // a = b
+    add     w20, w23, w20    // b = temp + b
+
+    add     w21, w21, #1     // i++
     b       loop
 
 done:
     // Imprimir nueva línea
-    adr     x0, fmt_nl
+    adr     x0, msg_nl
     bl      printf
 
+    // Epílogo
     mov     w0, #0
     ldp     x29, x30, [sp], #16
     ret

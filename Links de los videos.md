@@ -6,3 +6,6 @@ https://asciinema.org/a/8JzFUdX5nQY0gcdY9CAweD19L
 
 ### Programa 2
 https://asciinema.org/a/yc4qgxNZ3Yae9EUX5MrJeDNF0
+
+### Programa 3
+https://asciinema.org/a/UFzQwdTU2lIyOWglosvtWWiTk

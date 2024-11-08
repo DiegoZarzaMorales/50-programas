@@ -1,18 +1,6 @@
 /*
 Autor: [Zarza Morales Jose Diego] [2221036]
 Propósito: Convertir temperatura de Celsius a Fahrenheit en ARM64
-
-Código equivalente en C#:
-using System;
-class Program
-{
-    static void Main()
-    {
-        float celsius = 25.0f;
-        float fahrenheit = (celsius * 9.0f / 5.0f) + 32.0f;
-        Console.WriteLine($"{celsius}°C es igual a {fahrenheit}°F");
-    }
-}
 */
 
 .data
@@ -24,10 +12,11 @@ class Program
 
 .text
 .global main
-.balign 4
 
 main:
+    // Prólogo
     stp     x29, x30, [sp, #-16]!
+    mov     x29, sp
 
     // Cargar valores
     adr     x0, celsius
@@ -53,6 +42,7 @@ main:
     adr     x0, fmt_str
     bl      printf
 
+    // Epílogo
     mov     w0, #0
     ldp     x29, x30, [sp], #16
     ret

@@ -21,52 +21,59 @@ class Program
 .data
     cadena:         .string "Hola Mundo"
     buffer:         .skip 256
-    fmt_original:   .string "Texto original: %s\n"
-    fmt_invertido:  .string "Texto invertido: %s\n"
+    msg_original:   .string "Texto original: %s\n"
+    msg_invertido:  .string "Texto invertido: %s\n"
 
 .text
 .global main
-.balign 4
 
 main:
+    // Prólogo
     stp     x29, x30, [sp, #-16]!
+    mov     x29, sp
 
     // Imprimir cadena original
-    adr     x0, fmt_original
+    adr     x0, msg_original
     adr     x1, cadena
     bl      printf
 
-    // Calcular longitud de la cadena
-    adr     x19, cadena            // x19 = dirección de la cadena
-    mov     x20, #0                // x20 = longitud
+    // Obtener longitud de la cadena
+    adr     x19, cadena      // x19 = dirección de la cadena
+    mov     w20, #0          // w20 = longitud
 
 strlen_loop:
-    ldrb    w21, [x19, x20]       // Cargar byte
-    cbz     w21, strlen_done       // Si es 0, fin de cadena
-    add     x20, x20, #1          // Incrementar longitud
+    ldrb    w21, [x19, w20]  // Cargar byte
+    cbz     w21, invertir    // Si es 0, empezar inversión
+    add     w20, w20, #1     // longitud++
     b       strlen_loop
 
-strlen_done:
-    // Copiar e invertir la cadena
-    adr     x21, buffer           // x21 = dirección del buffer
-    sub     x20, x20, #1          // x20 = longitud - 1
+invertir:
+    // Preparar buffer para cadena invertida
+    adr     x21, buffer      // x21 = dirección del buffer
+    sub     w20, w20, #1     // Ajustar longitud (índice máximo)
+    mov     w22, #0          // w22 = índice desde el inicio
 
 copy_loop:
-    ldrb    w22, [x19, x20]       // Cargar byte desde el final
-    strb    w22, [x21]            // Guardar byte al inicio del buffer
-    add     x21, x21, #1          // Avanzar puntero destino
-    subs    x20, x20, #1          // Retroceder en la cadena original
-    bpl     copy_loop             // Continuar si no hemos llegado al inicio
+    cmp     w20, #0          // Si hemos terminado
+    blt     print_result     // Imprimir resultado
 
+    ldrb    w23, [x19, w20]  // Cargar carácter desde el final
+    strb    w23, [x21, w22]  // Guardar en buffer desde el inicio
+    sub     w20, w20, #1     // Decrementar índice origen
+    add     w22, w22, #1     // Incrementar índice destino
+    b       copy_loop
+
+print_result:
     // Agregar null terminator
-    mov     w22, #0
-    strb    w22, [x21]
+    mov     w23, #0
+    strb    w23, [x21, w22]
 
-    // Imprimir cadena invertida
-    adr     x0, fmt_invertido
-    adr     x1, buffer
+    // Imprimir resultado
+    adr     x0, msg_invertido
+    mov     x1, x21
     bl      printf
 
+    // Epílogo
     mov     w0, #0
     ldp     x29, x30, [sp], #16
     ret

@@ -23,10 +23,11 @@ class Program
 
 .text
 .global main
-.balign 4
 
 main:
+    // Prólogo
     stp     x29, x30, [sp, #-16]!
+    mov     x29, sp
 
     // Cargar números
     adr     x0, num1
@@ -41,6 +42,7 @@ main:
     adr     x0, fmt_str
     bl      printf
 
+    // Epílogo
     mov     w0, #0
     ldp     x29, x30, [sp], #16
     ret

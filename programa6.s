@@ -1,6 +1,6 @@
 /*
 Autor: [Zarza Morales Jose Diego] [2221036]
-Propósito: Calcular la suma de los primeros N números naturales en ARM64
+Propósito: Calcular la suma de los N primeros números naturales en ARM64
 
 Código equivalente en C#:
 using System;
@@ -25,32 +25,34 @@ class Program
 
 .text
 .global main
-.balign 4
 
 main:
+    // Prólogo
     stp     x29, x30, [sp, #-16]!
+    mov     x29, sp
 
     // Inicializar variables
     adr     x0, n
-    ldr     w19, [x0]               // w19 = n
-    mov     w20, #0                 // w20 = suma
-    mov     w21, #1                 // w21 = i = 1
+    ldr     w19, [x0]        // w19 = n
+    mov     w20, #0          // w20 = suma
+    mov     w21, #1          // w21 = i = 1
 
 loop:
-    cmp     w21, w19                // Comparar i con n
-    bgt     done                    // Si i > n, terminar
-    
-    add     w20, w20, w21           // suma += i
-    add     w21, w21, #1            // i++
+    cmp     w21, w19         // Comparar i con n
+    bgt     done            // Si i > n, terminar
+
+    add     w20, w20, w21    // suma += i
+    add     w21, w21, #1     // i++
     b       loop
 
 done:
     // Imprimir resultado
     adr     x0, fmt_str
-    mov     w1, w19                 // n
-    mov     w2, w20                 // suma
+    mov     w1, w19          // n
+    mov     w2, w20          // suma
     bl      printf
 
+    // Epílogo
     mov     w0, #0
     ldp     x29, x30, [sp], #16
     ret

@@ -84,3 +84,39 @@ search_loop:
     bgt     not_found
 
     add     w24, w
+// Calcular medio = (inicio + fin) / 2
+    add     w24, w22, w23    // w24 = inicio + fin
+    lsr     w24, w24, #1     // w24 = (inicio + fin) / 2
+
+    // Cargar elemento del medio
+    ldr     w25, [x19, w24, SXTW 2]  // w25 = arr[medio]
+
+    // Comparar con valor buscado
+    cmp     w25, w21
+    beq     found            // Si son iguales, encontrado
+    blt     greater          // Si arr[medio] < buscar, buscar en mitad superior
+    
+    // Buscar en mitad inferior
+    sub     w23, w24, #1     // fin = medio - 1
+    b       search_loop
+
+greater:
+    add     w22, w24, #1     // inicio = medio + 1
+    b       search_loop
+
+found:
+    adr     x0, msg_found
+    mov     w1, w21          // Valor buscado
+    mov     w2, w24          // Posición
+    bl      printf
+    b       done
+
+not_found:
+    adr     x0, msg_not
+    mov     w1, w21          // Valor buscado
+    bl      printf
+
+done:
+    mov     w0, #0
+    ldp     x29, x30, [sp], #16
+    ret

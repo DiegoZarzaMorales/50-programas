@@ -84,10 +84,10 @@ inner_loop:
     add     w25, w25, w22    // + i
 
     // Transponer elemento
-    lsl     w24, w24, #2     // * 4 bytes
-    lsl     w25, w25, #2     // * 4 bytes
-    ldr     w26, [x19, w24]  // Cargar elemento original
-    str     w26, [x20, w25]  // Guardar en nueva posición
+    lsl     x24, x24, #2     // * 4 bytes
+    lsl     x25, x25, #2     // * 4 bytes
+    ldr     w26, [x19, x24]  // Cargar elemento original
+    str     w26, [x20, x25]  // Guardar en nueva posición
 
     add     w23, w23, #1     // j++
     b       inner_loop
@@ -125,8 +125,8 @@ print_inner:
     // Imprimir elemento
     mul     w26, w24, w21
     add     w26, w26, w25
-    lsl     w26, w26, #2
-    ldr     w1, [x19, w26]
+    lsl     x26, x26, #2
+    ldr     w1, [x19, x26]
     adr     x0, msg_num
     bl      printf
 

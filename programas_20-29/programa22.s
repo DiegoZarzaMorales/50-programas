@@ -42,10 +42,10 @@ main:
     // Inicializar variables
     mov     w19, #0          // w19 = resultado
     adr     x20, cadena      // x20 = dirección cadena
-    mov     w21, #0          // w21 = índice
+    mov     x21, #0          // x21 = índice
 
 convert_loop:
-    ldrb    w22, [x20, w21]  // Cargar byte
+    ldrb    w22, [x20, x21]  // Cargar byte
     cbz     w22, print_result // Si es 0, terminar
 
     // resultado = resultado * 10 + (carácter - '0')
@@ -54,7 +54,7 @@ convert_loop:
     sub     w22, w22, #48     // carácter - '0'
     add     w19, w19, w22     // + dígito
 
-    add     w21, w21, #1      // Siguiente carácter
+    add     x21, x21, #1      // Siguiente carácter
     b       convert_loop
 
 print_result:

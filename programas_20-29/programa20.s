@@ -89,15 +89,15 @@ inner_loop:
     // Calcular índices
     mul     w27, w23, w22    // i * size
     add     w27, w27, w26    // + k
-    lsl     w27, w27, #2     // * 4
+    lsl     x27, x27, #2     // * 4
 
     mul     w28, w26, w22    // k * size
     add     w28, w28, w24    // + j
-    lsl     w28, w28, #2     // * 4
+    lsl     x28, x28, #2     // * 4
 
     // Multiplicar elementos
-    ldr     w29, [x19, w27]  // matriz1[i][k]
-    ldr     w30, [x20, w28]  // matriz2[k][j]
+    ldr     w29, [x19, x27]  // matriz1[i][k]
+    ldr     w30, [x20, x28]  // matriz2[k][j]
     mul     w29, w29, w30    // producto
     add     w25, w25, w29    // suma += producto
 
@@ -108,8 +108,8 @@ store_result:
     // Guardar resultado
     mul     w27, w23, w22    // i * size
     add     w27, w27, w24    // + j
-    lsl     w27, w27, #2     // * 4
-    str     w25, [x21, w27]  // resultado[i][j] = suma
+    lsl     x27, x27, #2     // * 4
+    str     w25, [x21, x27]  // resultado[i][j] = suma
 
     add     w24, w24, #1     // j++
     b       middle_loop
@@ -153,8 +153,8 @@ print_inner:
     // Imprimir elemento
     mul     w23, w21, w19
     add     w23, w23, w22
-    lsl     w23, w23, #2
-    ldr     w1, [x20, w23]
+    lsl     x23, x23, #2
+    ldr     w1, [x20, x23]
     adr     x0, msg_num
     bl      printf
 

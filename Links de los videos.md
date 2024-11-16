@@ -3,3 +3,6 @@
 
 ## Programas del 1 al 9
 https://asciinema.org/a/ZpbMZj2QnYXF2GQxwYMKkwrk2
+
+## Programas del 10 al 19
+https://asciinema.org/a/0inNgQtQR2adjbVb5slwaXla4

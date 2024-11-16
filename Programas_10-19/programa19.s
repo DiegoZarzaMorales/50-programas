@@ -78,13 +78,13 @@ inner_loop:
     // Calcular índice = i * size + j
     mul     w25, w23, w22
     add     w25, w25, w24
-    lsl     w25, w25, #2     // * 4 (tamaño de word)
+    lsl     x25, x25, #2     // * 4 (tamaño de word)
 
     // Sumar elementos
-    ldr     w26, [x19, w25]  // matriz1[i][j]
-    ldr     w27, [x20, w25]  // matriz2[i][j]
+    ldr     w26, [x19, x25]  // matriz1[i][j]
+    ldr     w27, [x20, x25]  // matriz2[i][j]
     add     w28, w26, w27    // suma
-    str     w28, [x21, w25]  // resultado[i][j] = suma
+    str     w28, [x21, x25]  // resultado[i][j] = suma
 
     add     w24, w24, #1     // j++
     b       inner_loop
@@ -128,8 +128,8 @@ print_inner:
     // Imprimir elemento
     mul     w23, w21, w19
     add     w23, w23, w22
-    lsl     w23, w23, #2
-    ldr     w1, [x20, w23]
+    lsl     x23, x23, #2
+    ldr     w1, [x20, x23]
     adr     x0, msg_num
     bl      printf
 

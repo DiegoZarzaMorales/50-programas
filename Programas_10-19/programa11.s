@@ -42,29 +42,29 @@ main:
 
     // Calcular longitud
     adr     x19, texto       // x19 = dirección del texto
-    mov     w20, #0          // w20 = longitud
+    mov     x20, #0          // x20 = longitud
 
 strlen_loop:
-    ldrb    w21, [x19, w20]  // Cargar byte
+    ldrb    w21, [x19, x20]  // Cargar byte
     cbz     w21, check_palin // Si es 0, iniciar verificación
-    add     w20, w20, #1     // longitud++
+    add     x20, x20, #1     // longitud++
     b       strlen_loop
 
 check_palin:
-    mov     w21, #0          // w21 = inicio
-    sub     w20, w20, #1     // w20 = fin (longitud - 1)
+    mov     x21, #0          // x21 = inicio
+    sub     x20, x20, #1     // x20 = fin (longitud - 1)
 
 compare_loop:
-    cmp     w21, w20         // Comparar inicio con fin
+    cmp     x21, x20         // Comparar inicio con fin
     bge     es_palindromo    // Si inicio >= fin, es palíndromo
 
-    ldrb    w22, [x19, w21]  // Cargar carácter del inicio
-    ldrb    w23, [x19, w20]  // Cargar carácter del fin
+    ldrb    w22, [x19, x21]  // Cargar carácter del inicio
+    ldrb    w23, [x19, x20]  // Cargar carácter del fin
     cmp     w22, w23         // Comparar caracteres
     bne     no_palindromo    // Si son diferentes, no es palíndromo
 
-    add     w21, w21, #1     // Incrementar inicio
-    sub     w20, w20, #1     // Decrementar fin
+    add     x21, x21, #1     // Incrementar inicio
+    sub     x20, x20, #1     // Decrementar fin
     b       compare_loop
 
 es_palindromo:

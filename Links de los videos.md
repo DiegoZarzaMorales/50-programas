@@ -12,3 +12,7 @@ https://asciinema.org/a/THuJk9mVv77gsVD9VxqVrGxKY
 
 ## Programas del 30 al 39
 https://asciinema.org/a/YNgtuLvx6RqcAaazFm4thP87x
+
+## Programas del 40 al 49
+### Agregado el programa 50
+https://asciinema.org/a/m1u34F5PrBBEZdmiRCCEwvcTA

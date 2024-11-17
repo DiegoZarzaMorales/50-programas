@@ -1,4 +1,4 @@
-# Como esta todo :)
+# Como esta todo acomodado :)
 
 ### Los programas estan divididos por carpetas de;
 

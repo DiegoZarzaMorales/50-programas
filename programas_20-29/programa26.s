@@ -110,11 +110,11 @@ binary_loop:
     lsr     w5, w0, w3      // Desplazar a la derecha
     and     w5, w5, #1      // Obtener último bit
     add     w5, w5, #48     // Convertir a ASCII ('0' o '1')
-    strb    w5, [x1, w4]    // Guardar en buffer
+    strb    w5, [x1, x4]    // Guardar en buffer
     add     w4, w4, #1      // Siguiente posición
     cmp     w3, #0
     bne     binary_loop
 
     mov     w5, #0          // Null terminator
-    strb    w5, [x1, w4]
+    strb    w5, [x1, x4]
     ret

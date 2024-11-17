@@ -6,3 +6,6 @@ https://asciinema.org/a/ZpbMZj2QnYXF2GQxwYMKkwrk2
 
 ## Programas del 10 al 19
 https://asciinema.org/a/0inNgQtQR2adjbVb5slwaXla4
+
+## Programas del 20 al 29
+https://asciinema.org/a/THuJk9mVv77gsVD9VxqVrGxKY

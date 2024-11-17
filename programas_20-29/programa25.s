@@ -56,7 +56,7 @@ main:
     mov     w22, #0          // w22 = índice texto
 
 process_loop:
-    ldrb    w23, [x21, w22]  // Cargar carácter
+    ldrb    w23, [x21, x22]  // Cargar carácter
     cbz     w23, print_result // Si es 0, terminar
 
     // Verificar si es letra
@@ -84,8 +84,6 @@ print_result:
     mov     w1, w19
     bl      printf
 
-    adr     x0, msg_
-    // Imprimir consonantes
     adr     x0, msg_cons
     mov     w1, w20
     bl      printf
@@ -121,7 +119,7 @@ is_vowel:
     mov     w1, #0           // w1 = índice
 
 check_vowel:
-    ldrb    w2, [x0, w1]     // Cargar vocal
+    ldrb    w2, [x0, x1]     // Cargar vocal
     cbz     w2, not_vowel    // Si es 0, no es vocal
     cmp     w2, w23          // Comparar con carácter actual
     beq     is_vowel_true
@@ -135,4 +133,3 @@ is_vowel_true:
 not_vowel:
     mov     w0, #0
     ret
-    

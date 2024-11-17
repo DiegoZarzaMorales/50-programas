@@ -82,10 +82,10 @@ binary_loop:
     lsr     w5, w0, w3
     and     w5, w5, #1
     add     w5, w5, #48
-    strb    w5, [x1, w4]
-    add     w4, w4, #1
+    strb    w5, [x1, x4]
+    add     x4, x4, #1
     cmp     w3, #0
     bne     binary_loop
     mov     w5, #0
-    strb    w5, [x1, w4]
+    strb    w5, [x1, x4]
     ret

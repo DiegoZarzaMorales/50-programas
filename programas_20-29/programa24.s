@@ -38,7 +38,7 @@ main:
     mov     w20, #0          // w20 = contador
 
 count_loop:
-    ldrb    w21, [x19, w20]  // Cargar byte
+    ldrb    w21, [x19, x20]  // Cargar byte
     cbz     w21, print_result // Si es 0, terminar
     add     w20, w20, #1     // Incrementar contador
     b       count_loop
